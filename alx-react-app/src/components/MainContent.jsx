@@ -1,10 +1,11 @@
 function MainContent() {
   return (
-    <div style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
-      <h1 style={{ color: "green", textAlign: "center" }}>Welcome to the Main Content</h1>
-      <p style={{ fontSize: "16px" }}>Here’s where the magic happens.</p>
-    </div>
+    <main style={{ padding: "20px", backgroundColor: "#f0f0f0", color: "#333", textAlign: "center" }}>
+      <h1>Main Content</h1>
+      <p>This is the main content area.</p>
+    </main>
   );
 }
 
 export default MainContent;
+
