@@ -1,8 +1,9 @@
 function Header() {
   return (
-    <header style={{ backgroundColor: 'navy', color: 'white', textAlign: 'center', padding: '10px' }}>
-      <h1>My Favorite Cities</h1>
+    <header style={{ backgroundColor: 'blue', color: 'white', textAlign: 'center', padding: '20px' }}>
+      <h1>Welcome to My App</h1>
     </header>
   );
 }
+
 export default Header;
