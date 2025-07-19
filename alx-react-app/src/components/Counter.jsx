@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+// src/components/Counter.jsx
+import React from 'react';
 
-export default function Counter() {
-  const [count, setCount] = useState(0);
+function Counter() {
   return (
     <div>
-      <p>Current Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
-      <button onClick={() => setCount(0)}>Reset</button>
+      <h2>Counter</h2>
+      <p>This is the counter component.</p>
     </div>
   );
 }
+
+export default Counter;
