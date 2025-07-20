@@ -1,8 +1,11 @@
+import React from 'react';
+
 function MainContent() {
   return (
-    <main style={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
-      <p>This is the main content area.</p>
-    </main>
+    <div>
+      <h1>My Favorite Cities</h1>
+      <p>I love to visit New York, Paris, and Tokyo.</p>
+    </div>
   );
 }
 
