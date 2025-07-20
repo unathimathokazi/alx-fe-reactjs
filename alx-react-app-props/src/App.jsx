@@ -1,20 +1,14 @@
 // src/App.jsx
-import React from 'react';
-import Counter from './components/Counter';
-import MainContent from './components/MainContent';
-import Footer from './components/Footer';
-import UserContext from './UserContext';
-import UserProfile from './components/UserProfile';
+import React from "react";
+import UserContext from "./context/UserContext";
+import UserProfile from "./components/UserProfile";
 
 function App() {
+  const user = { name: "Nelly", age: 23 }; // example context data
+
   return (
-    <UserContext.Provider value={{ name: 'Nelly', age: 23 }}>
-      <div>
-        <Counter />
-        <MainContent />
-        <UserProfile />
-        <Footer />
-      </div>
+    <UserContext.Provider value={user}>
+      <UserProfile />
     </UserContext.Provider>
   );
 }
