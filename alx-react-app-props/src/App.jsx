@@ -7,7 +7,8 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 import UserProfile from "./components/UserProfile"; // just in case
 
-import UserContext from "./props/UserContext";
+import UserContext from "./context/UserContext";
+
 
 function App() {
   const user = {
