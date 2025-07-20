@@ -2,10 +2,10 @@ import React from 'react';
 
 function MainContent() {
   return (
-    <div>
+    <main style={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
       <h1>My Favorite Cities</h1>
       <p>I love to visit New York, Paris, and Tokyo.</p>
-    </div>
+    </main>
   );
 }
 
