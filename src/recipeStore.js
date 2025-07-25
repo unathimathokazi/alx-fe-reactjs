@@ -1,5 +1,5 @@
-import { create } from 'zustand'; // ✅ correct
-
+// src/recipeStore.js
+import create from 'zustand';
 
 const useRecipeStore = create((set) => ({
   recipes: [
@@ -14,7 +14,10 @@ const useRecipeStore = create((set) => ({
         recipe.id === updatedRecipe.id ? updatedRecipe : recipe
       ),
     })),
-  setRecipes: (recipes) => set({ recipes }),
+  deleteRecipe: (id) =>
+    set((state) => ({
+      recipes: state.recipes.filter((recipe) => recipe.id !== id),
+    })),
 }));
 
 export default useRecipeStore;
