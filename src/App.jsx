@@ -1,11 +1,9 @@
-import AddRecipeForm from './AddRecipeForm';
-import RecipeList from './RecipeList';
+import RecipeList from "./components/RecipeList";
 
 function App() {
   return (
     <div>
-      <h1>Recipe Sharing</h1>
-      <AddRecipeForm />
+      <h1>My Recipe App 🍲</h1>
       <RecipeList />
     </div>
   );

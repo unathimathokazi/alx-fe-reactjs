@@ -1,20 +1,22 @@
+// src/components/RecipeList.jsx
 import React from "react";
-import useRecipeStore from './recipeStore';
-
-
+import useRecipeStore from "../recipeStore";
 
 const RecipeList = () => {
-  const { recipes, filteredRecipes } = useRecipeStore();
-  const recipesToShow = filteredRecipes.length ? filteredRecipes : recipes;
+  const recipes = useRecipeStore((state) => state.recipes);
 
   return (
     <div>
-      {recipesToShow.map((recipe) => (
-        <div key={recipe.id}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-        </div>
-      ))}
+      {recipes.length ? (
+        recipes.map((recipe) => (
+          <div key={recipe.id} style={{ marginBottom: "1rem" }}>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+          </div>
+        ))
+      ) : (
+        <p>No recipes found. 🥲</p>
+      )}
     </div>
   );
 };
