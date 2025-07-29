@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 
@@ -36,7 +37,7 @@ function Search() {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>Looks like we can't find the user 😢</p>}
+      {error && <p>Looks like we cant find the user</p>}
       {user && (
         <div className="bg-gray-100 p-4 rounded shadow">
           <img src={user.avatar_url} alt={user.login} className="w-16 h-16 rounded-full" />
