@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { fetchUserData } from "../services/githubService";  // <--- import service
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -15,20 +16,9 @@ function Search() {
     setUsers([]);
 
     try {
-      // Build the search query
-      let queryString = query.trim();
-      if (location.trim()) queryString += `+location:${location.trim()}`;
-      if (minRepos.trim()) queryString += `+repos:>=${minRepos.trim()}`;
-
-      const response = await fetch(
-        `https://api.github.com/search/users?q=${queryString}`
-      );
-      if (!response.ok) throw new Error("User not found");
-
-      const data = await response.json();
-
-      if (data.items && data.items.length > 0) {
-        setUsers(data.items);
+      const data = await fetchUserData(query, location, minRepos);  // <--- use service here
+      if (data && data.length > 0) {
+        setUsers(data);
       } else {
         setError(true);
       }
