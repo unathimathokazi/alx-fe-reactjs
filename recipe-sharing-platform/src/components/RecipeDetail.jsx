@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import recipes from "../data.json";
 
 const RecipeDetail = () => {
   const { id } = useParams();
-  const recipe = recipes.find((r) => r.id.toString() === id);
+  const [recipe, setRecipe] = useState(null);
+
+  useEffect(() => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const found = data.find((r) => r.id.toString() === id);
+        setRecipe(found);
+      })
+      .catch((err) => console.error(err));
+  }, [id]);
 
   if (!recipe) {
     return <p className="text-center mt-10">Recipe not found.</p>;
@@ -22,7 +31,7 @@ const RecipeDetail = () => {
       />
       <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
       <ul className="list-disc list-inside mb-4">
-        {recipe.ingredients.map((item, index) => (
+        {recipe.ingredients?.map((item, index) => (
           <li key={index} className="text-gray-700">{item}</li>
         ))}
       </ul>

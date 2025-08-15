@@ -28,7 +28,7 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-xl md:max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Add New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
