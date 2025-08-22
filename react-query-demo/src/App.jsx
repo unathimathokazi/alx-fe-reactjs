@@ -1,16 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
-import Home from "./components/Home.jsx";
-import PostsComponent from "./components/PostsComponent.jsx"; // <-- add this
+// src/App.jsx
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PostsComponent from "./components/PostsComponent";
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/posts" element={<PostsComponent />} /> {/* New route */}
-      </Routes>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <h1>React Query Example</h1>
+        <PostsComponent />
+      </div>
+    </QueryClientProvider>
   );
 }
