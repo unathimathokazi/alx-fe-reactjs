@@ -1,4 +1,10 @@
-# Logs
+node_modules/
+dist/
+.env
+.DS_Store
+=x
+
+=# Logs
 logs
 *.log
 npm-debug.log*
