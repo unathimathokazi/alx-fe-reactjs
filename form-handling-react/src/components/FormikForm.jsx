@@ -1,48 +1,43 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-const schema = Yup.object().shape({
-  name: Yup.string().required("Name required"),
-  email: Yup.string().email("Invalid email").required("Email required"),
+const SignupSchema = Yup.object().shape({
+  username: Yup.string().required("Username is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().min(6, "Password too short").required("Password is required"),
 });
 
 export default function FormikForm() {
   return (
     <Formik
-      initialValues={{ name: "", email: "" }}
-      validationSchema={schema}
-      onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+      initialValues={{ username: "", email: "", password: "" }}
+      validationSchema={SignupSchema}
+      onSubmit={(values) => {
+        console.log(values);
+        // Call API here
+      }}
     >
       {() => (
-        <Form className="space-y-2">
+        <Form>
           <div>
-            <Field
-              name="name"
-              placeholder="Name"
-              className="border p-2 rounded w-full"
-            />
-            <ErrorMessage
-              name="name"
-              component="div"
-              className="text-red-500 text-sm"
-            />
+            <label>Username:</label>
+            <Field name="username" />
+            <ErrorMessage name="username" component="div" />
           </div>
+
           <div>
-            <Field
-              name="email"
-              placeholder="Email"
-              type="email"
-              className="border p-2 rounded w-full"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="text-red-500 text-sm"
-            />
+            <label>Email:</label>
+            <Field name="email" type="email" />
+            <ErrorMessage name="email" component="div" />
           </div>
-          <button type="submit" className="bg-green-500 text-white p-2 rounded">
-            Submit
-          </button>
+
+          <div>
+            <label>Password:</label>
+            <Field name="password" type="password" />
+            <ErrorMessage name="password" component="div" />
+          </div>
+
+          <button type="submit">Register</button>
         </Form>
       )}
     </Formik>

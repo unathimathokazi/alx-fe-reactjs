@@ -1,3 +1,3 @@
 export default function ProfileDetails() {
-  return <h2>Profile Details Page</h2>;
+  return <h3>Profile Details Component</h3>;
 }

@@ -1,51 +1,28 @@
 import { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
 
 export default function TodoList() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Todo App", completed: false },
-  ]);
+  const [todos, setTodos] = useState([]);
+  const [task, setTask] = useState("");
 
-  const addTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      text,
-      completed: false,
-    };
-    setTodos([...todos, newTodo]);
-  };
-
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
+  function addTodo() {
+    if (task.trim() === "") return;
+    setTodos([...todos, task]);
+    setTask("");
+  }
 
   return (
     <div>
       <h2>Todo List</h2>
-      <AddTodoForm addTodo={addTodo} />
+      <input
+        type="text"
+        placeholder="Enter a task"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <button onClick={addTodo}>Add</button>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} style={{ margin: "0.5rem 0" }}>
-            <span
-              onClick={() => toggleTodo(todo.id)}
-              style={{
-                cursor: "pointer",
-                textDecoration: todo.completed ? "line-through" : "none",
-              }}
-            >
-              {todo.text}
-            </span>{" "}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-          </li>
+        {todos.map((t, i) => (
+          <li key={i}>{t}</li>
         ))}
       </ul>
     </div>

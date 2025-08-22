@@ -1,39 +1,61 @@
 import { useState } from "react";
 
 export default function RegistrationForm() {
-  const [form, setForm] = useState({ name: "", email: "" });
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Name: ${form.name}, Email: ${form.email}`);
-  }
+
+    // Basic validation
+    let validationErrors = {};
+    if (!username) validationErrors.username = "Username is required";
+    if (!email) validationErrors.email = "Email is required";
+    if (!password) validationErrors.password = "Password is required";
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      console.log({ username, email, password });
+      // Call API here or do next steps
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={form.name}
-        onChange={handleChange}
-        className="border p-2 rounded w-full"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        className="border p-2 rounded w-full"
-      />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-        Register
-      </button>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {errors.username && <span>{errors.username}</span>}
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {errors.email && <span>{errors.email}</span>}
+      </div>
+
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {errors.password && <span>{errors.password}</span>}
+      </div>
+
+      <button type="submit">Register</button>
     </form>
   );
 }
