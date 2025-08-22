@@ -4,6 +4,7 @@ import Home from "./components/Home.jsx";
 import PostPage from "./components/PostPage.jsx";
 import Profile from "./components/Profile.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import BlogPost from "./components/BlogPost.jsx"; // <-- import
 
 export default function App() {
   const isLoggedIn = true; // Simulated login state
@@ -24,8 +25,9 @@ export default function App() {
           }
         />
 
-        {/* Dynamic Route */}
+        {/* Dynamic Routes */}
         <Route path="/post/:id" element={<PostPage />} />
+        <Route path="/blog/:id" element={<BlogPost />} />  {/* <-- new route */}
       </Routes>
     </Router>
   );
