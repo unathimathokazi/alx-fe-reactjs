@@ -1,28 +1,29 @@
+// src/components/TodoList.jsx
 import { useState } from "react";
 
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
-  const [task, setTask] = useState("");
+  const [input, setInput] = useState("");
 
-  function addTodo() {
-    if (task.trim() === "") return;
-    setTodos([...todos, task]);
-    setTask("");
-  }
+  const addTodo = () => {
+    if (input.trim() === "") return;
+    setTodos([...todos, input]);
+    setInput("");
+  };
 
   return (
     <div>
-      <h2>Todo List</h2>
       <input
         type="text"
-        placeholder="Enter a task"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
+        placeholder="Add todo"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
       <button onClick={addTodo}>Add</button>
+
       <ul>
-        {todos.map((t, i) => (
-          <li key={i}>{t}</li>
+        {todos.map((todo, idx) => (
+          <li key={idx}>{todo}</li>
         ))}
       </ul>
     </div>
