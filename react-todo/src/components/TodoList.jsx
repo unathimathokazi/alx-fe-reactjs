@@ -4,11 +4,12 @@ import AddTodoForm from "./AddTodoForm";
 export default function TodoList() {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Todo App", completed: false },
+    { id: 2, text: "Build a project", completed: false },
   ]);
 
   const addTodo = (text) => {
-    setTodos([...todos, { id: Date.now(), text, completed: false }]);
+    const newTodo = { id: Date.now(), text, completed: false };
+    setTodos([...todos, newTodo]);
   };
 
   const toggleTodo = (id) => {
@@ -26,7 +27,7 @@ export default function TodoList() {
   return (
     <div>
       <AddTodoForm addTodo={addTodo} />
-      <ul>
+      <ul data-testid="todo-list">
         {todos.map((todo) => (
           <li
             key={todo.id}
@@ -34,11 +35,17 @@ export default function TodoList() {
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
-              marginBottom: "0.5rem",
             }}
+            data-testid={`todo-${todo.id}`}
           >
-            {todo.text}{" "}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+            {todo.text}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+              data-testid={`delete-${todo.id}`}
+            >
               Delete
             </button>
           </li>
