@@ -1,23 +1,33 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import TodoList from "../components/TodoList";
 
-test("renders default todos", () => {
+test("renders input and add button", () => {
   render(<TodoList />);
-  const items = screen.getAllByTestId("todo-item");
-  expect(items.length).toBeGreaterThan(0);
+  expect(screen.getByPlaceholderText(/add a todo/i)).toBeInTheDocument();
+  expect(screen.getByText(/add/i)).toBeInTheDocument();
 });
 
-test("adds a new todo", () => {
+test("adds a todo", () => {
   render(<TodoList />);
-  fireEvent.click(screen.getByText(/Add Task/i));
-  const items = screen.getAllByTestId("todo-item");
-  expect(items).toHaveLength(3); // initial 2 + 1 new
+  const input = screen.getByPlaceholderText(/add a todo/i);
+  const button = screen.getByText(/add/i);
+
+  fireEvent.change(input, { target: { value: "Learn React" } });
+  fireEvent.click(button);
+
+  expect(screen.getByText(/learn react/i)).toBeInTheDocument();
 });
 
 test("deletes a todo", () => {
   render(<TodoList />);
-  const deleteButton = screen.getAllByText(/Delete/i)[0];
-  fireEvent.click(deleteButton);
-  const items = screen.queryAllByTestId("todo-item");
-  expect(items.length).toBe(1);
+  const input = screen.getByPlaceholderText(/add a todo/i);
+  const button = screen.getByText(/add/i);
+
+  fireEvent.change(input, { target: { value: "Learn React" } });
+  fireEvent.click(button);
+
+  const deleteBtn = screen.getByText(/delete/i);
+  fireEvent.click(deleteBtn);
+
+  expect(screen.queryByText(/learn react/i)).not.toBeInTheDocument();
 });
