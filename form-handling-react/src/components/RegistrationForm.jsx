@@ -9,7 +9,7 @@ export default function RegistrationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
+    
     let validationErrors = {};
     if (!username) validationErrors.username = "Username is required";
     if (!email) validationErrors.email = "Email is required";
@@ -19,7 +19,7 @@ export default function RegistrationForm() {
 
     if (Object.keys(validationErrors).length === 0) {
       console.log({ username, email, password });
-      // Call API here or do next steps
+     
     }
   };
 
