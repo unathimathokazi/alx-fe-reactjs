@@ -10,7 +10,7 @@ function TodoList() {
 
   const addTodo = (text) => {
     const newTodo = {
-      id: todos.length + 1, // Simple ID generation; use UUID in production
+      id: todos.length + 1,
       text,
       completed: false,
     };
