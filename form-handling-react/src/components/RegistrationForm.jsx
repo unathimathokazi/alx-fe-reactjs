@@ -4,58 +4,57 @@ export default function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    
-    let validationErrors = {};
-    if (!username) validationErrors.username = "Username is required";
-    if (!email) validationErrors.email = "Email is required";
-    if (!password) validationErrors.password = "Password is required";
-
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
-      console.log({ username, email, password });
-     
+    if (!username || !email || !password) {
+      alert("All fields are required!");
+      return;
     }
+    alert(`Registered:\nUsername: ${username}\nEmail: ${email}`);
+    setUsername("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
       <div>
-        <label>Username:</label>
+        <label htmlFor="username">Username</label>
         <input
+          id="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="w-full border p-2 rounded"
         />
-        {errors.username && <span>{errors.username}</span>}
       </div>
 
       <div>
-        <label>Email:</label>
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full border p-2 rounded"
         />
-        {errors.email && <span>{errors.email}</span>}
       </div>
 
       <div>
-        <label>Password:</label>
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="w-full border p-2 rounded"
         />
-        {errors.password && <span>{errors.password}</span>}
       </div>
 
-      <button type="submit">Register</button>
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        Register
+      </button>
     </form>
   );
 }
