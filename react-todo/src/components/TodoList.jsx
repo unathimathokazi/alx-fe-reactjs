@@ -1,31 +1,29 @@
-// src/components/TodoList.jsx
 import { useState } from "react";
 
 export default function TodoList() {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
+  const [todos, setTodos] = useState(["Learn React", "Learn Testing"]);
 
-  const addTodo = () => {
-    if (input.trim() === "") return;
-    setTodos([...todos, input]);
-    setInput("");
+  const addTodo = (todo) => {
+    if (!todo.trim()) return;
+    setTodos([...todos, todo]);
+  };
+
+  const removeTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
   };
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Add todo"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={addTodo}>Add</button>
-
+      <h2>Todo List</h2>
       <ul>
-        {todos.map((todo, idx) => (
-          <li key={idx}>{todo}</li>
+        {todos.map((todo, index) => (
+          <li key={index} data-testid="todo-item">
+            {todo}
+            <button onClick={() => removeTodo(index)}>Delete</button>
+          </li>
         ))}
       </ul>
+      <button onClick={() => addTodo("New Task")}>Add Task</button>
     </div>
   );
 }
