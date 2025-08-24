@@ -5,7 +5,7 @@ export default function AddTodoForm({ addTodo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text) return;
+    if (!text.trim()) return;
     addTodo(text);
     setText("");
   };
@@ -16,10 +16,9 @@ export default function AddTodoForm({ addTodo }) {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new todo"
-        data-testid="input-todo"
+        placeholder="Add a todo"
       />
-      <button type="submit" data-testid="add-button">Add</button>
+      <button type="submit">Add</button>
     </form>
   );
 }
