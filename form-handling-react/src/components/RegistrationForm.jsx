@@ -4,55 +4,69 @@ export default function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username || !email || !password) {
-      alert("All fields are required!");
-      return;
+    const newErrors = {};
+
+    if (!username) newErrors.username = "Username is required";
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
+
+    setErrors(newErrors);
+
+    // Only submit if no errors
+    if (Object.keys(newErrors).length === 0) {
+      alert(`User Registered:\nUsername: ${username}\nEmail: ${email}`);
+      setUsername("");
+      setEmail("");
+      setPassword("");
     }
-    alert(`Registered:\nUsername: ${username}\nEmail: ${email}`);
-    setUsername("");
-    setEmail("");
-    setPassword("");
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
+      {/* Username */}
       <div>
-        <label htmlFor="username">Username</label>
+        <label>Username</label>
         <input
-          id="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full border p-2 rounded"
+          className="border px-2 py-1 w-full rounded"
         />
+        {errors.username && <div className="text-red-500">{errors.username}</div>}
       </div>
 
+      {/* Email */}
       <div>
-        <label htmlFor="email">Email</label>
+        <label>Email</label>
         <input
-          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full border p-2 rounded"
+          className="border px-2 py-1 w-full rounded"
         />
+        {errors.email && <div className="text-red-500">{errors.email}</div>}
       </div>
 
+      {/* Password */}
       <div>
-        <label htmlFor="password">Password</label>
+        <label>Password</label>
         <input
-          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full border p-2 rounded"
+          className="border px-2 py-1 w-full rounded"
         />
+        {errors.password && <div className="text-red-500">{errors.password}</div>}
       </div>
 
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
         Register
       </button>
     </form>
