@@ -2,7 +2,7 @@ import TodoList from "./components/TodoList";
 
 export default function App() {
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
+    <div>
       <h1>My Todo App</h1>
       <TodoList />
     </div>
