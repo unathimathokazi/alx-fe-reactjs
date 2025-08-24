@@ -34,9 +34,13 @@ export default function TodoList() {
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
+              marginBottom: "0.5rem",
             }}
           >
-            {todo.text} <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            {todo.text}{" "}
+            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

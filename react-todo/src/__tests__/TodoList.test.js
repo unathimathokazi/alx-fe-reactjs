@@ -7,27 +7,27 @@ test("renders initial todos", () => {
   expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
 });
 
-test("adds a new todo", () => {
+test("can add a new todo", () => {
   render(<TodoList />);
-  const input = screen.getByPlaceholderText("Add todo");
-  const button = screen.getByText("Add");
-
-  fireEvent.change(input, { target: { value: "Test new todo" } });
-  fireEvent.click(button);
-
-  expect(screen.getByText("Test new todo")).toBeInTheDocument();
+  fireEvent.change(screen.getByPlaceholderText(/add a new todo/i), {
+    target: { value: "New Todo" },
+  });
+  fireEvent.click(screen.getByText("Add"));
+  expect(screen.getByText("New Todo")).toBeInTheDocument();
 });
 
-test("toggles todo completion", () => {
+test("can toggle a todo's completed state", () => {
   render(<TodoList />);
   const todo = screen.getByText("Learn React");
+  expect(todo).not.toHaveStyle("text-decoration: line-through");
   fireEvent.click(todo);
   expect(todo).toHaveStyle("text-decoration: line-through");
 });
 
-test("deletes a todo", () => {
+test("can delete a todo", () => {
   render(<TodoList />);
+  const todo = screen.getByText("Learn React");
   const deleteButton = screen.getAllByText("Delete")[0];
   fireEvent.click(deleteButton);
-  expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
+  expect(todo).not.toBeInTheDocument();
 });
