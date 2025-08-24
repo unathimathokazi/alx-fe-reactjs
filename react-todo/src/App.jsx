@@ -1,10 +1,11 @@
-import TodoList from "./components/TodoList";
+import TodoList from './components/TodoList';
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <h1>My Todo App</h1>
+    <div className="container mx-auto p-4">
       <TodoList />
     </div>
   );
 }
+
+export default App;
