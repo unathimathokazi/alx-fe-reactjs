@@ -3,37 +3,35 @@ import TodoList from "../components/TodoList";
 
 test("renders initial todos", () => {
   render(<TodoList />);
-  expect(screen.getByText(/Learn React/i)).toBeInTheDocument();
-  expect(screen.getByText(/Build a Todo App/i)).toBeInTheDocument();
+  expect(screen.getByText("Learn React")).toBeInTheDocument();
+  expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
 });
 
 test("adds a new todo", () => {
   render(<TodoList />);
-  const input = screen.getByPlaceholderText(/add a todo/i);
-  const button = screen.getByText(/add/i);
+  const input = screen.getByPlaceholderText("Add todo");
+  const button = screen.getByText("Add");
 
-  fireEvent.change(input, { target: { value: "New Task" } });
+  fireEvent.change(input, { target: { value: "Test Todo" } });
   fireEvent.click(button);
 
-  expect(screen.getByText(/new task/i)).toBeInTheDocument();
+  expect(screen.getByText("Test Todo")).toBeInTheDocument();
 });
 
-test("toggles a todo", () => {
+test("toggles a todo completion", () => {
   render(<TodoList />);
-  const todo = screen.getByText(/Learn React/i);
+  const todo = screen.getByText("Learn React");
 
-  // initially not completed
   expect(todo).not.toHaveStyle("text-decoration: line-through");
-
   fireEvent.click(todo);
   expect(todo).toHaveStyle("text-decoration: line-through");
 });
 
 test("deletes a todo", () => {
   render(<TodoList />);
-  const deleteBtn = screen.getAllByText(/delete/i)[0];
+  const todo = screen.getByText("Learn React");
+  const deleteButton = todo.nextSibling;
 
-  fireEvent.click(deleteBtn);
-
-  expect(screen.queryByText(/Learn React/i)).not.toBeInTheDocument();
+  fireEvent.click(deleteButton);
+  expect(todo).not.toBeInTheDocument();
 });
